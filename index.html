@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101014">
+<title>TikTok Growth — Bảng điều khiển</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark">TG</div><div><b>TikTok Growth</b><small>PERSONAL WORKSPACE</small></div></div>
+    <div class="account-switch"><div class="avatar" id="avatarInitial">T</div><div class="account-meta"><b id="sideAccount">@your_account</b><small>Tài khoản cá nhân</small></div><span class="chevron">⌄</span></div>
+    <div class="nav-label">KHÔNG GIAN LÀM VIỆC</div>
+    <nav>
+      <button class="nav-item active" data-page="dashboard"><span>▦</span>Tổng quan</button>
+      <button class="nav-item" data-page="videos"><span>▣</span>Quản lý video</button>
+      <button class="nav-item" data-page="growth"><span>↗</span>Phân tích tăng trưởng</button>
+      <button class="nav-item" data-page="ideas"><span>✦</span>Ý tưởng nội dung</button>
+      <button class="nav-item" data-page="planner"><span>▦</span>Lịch nội dung</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="prototype-note"><span class="status-dot"></span><div><b>Chế độ Prototype</b><small>Dữ liệu lưu trên trình duyệt này</small></div></div>
+      <button class="nav-item" data-page="settings"><span>⚙</span>Cài đặt</button>
+      <div class="side-foot">TikTok Growth v0.1 · Bản thử nghiệm</div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu" aria-label="Mở menu">☰</button>
+      <div><div class="eyebrow">WORKSPACE / <span id="crumb">TỔNG QUAN</span></div><h1 id="pageTitle">Tổng quan</h1></div>
+      <div class="top-actions"><span class="date-pill" id="todayLabel"></span><button class="btn btn-primary" id="quickAdd">＋ Thêm video</button></div>
+    </header>
+
+    <section class="page active" id="page-dashboard">
+      <div class="welcome-row"><div><h2>Chào bạn, cùng phát triển kênh nhé! <span>✦</span></h2><p>Theo dõi hiệu quả nội dung và tìm cơ hội tăng trưởng tiếp theo.</p></div><div class="period-control"><span>Khoảng thời gian</span><select id="periodSelect"><option value="all">Toàn bộ dữ liệu</option><option value="30">30 ngày gần đây</option><option value="7">7 ngày gần đây</option></select></div></div>
+      <div class="notice"><span>ⓘ</span><div><b>Đây là dữ liệu mẫu của bản prototype.</b> Hãy thay bằng số liệu thực tế của bạn trong mục Quản lý video. Website chưa kết nối TikTok.</div></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Tổng lượt xem</span><span class="stat-icon pink">▶</span></div><strong id="totalViews">—</strong><small><i>View</i> · Tổng các video trong bộ dữ liệu</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Người theo dõi mới</span><span class="stat-icon cyan">＋</span></div><strong id="totalFollows">—</strong><small><i>Follow</i> · Tổng theo dõi quy đổi/ghi nhận</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Tỷ lệ tương tác</span><span class="stat-icon purple">♡</span></div><strong id="engagement">—</strong><small>Like + bình luận + chia sẻ / View</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Video đã theo dõi</span><span class="stat-icon yellow">▣</span></div><strong id="videoCount">—</strong><small>Số video trong thư viện</small></article>
+      </div>
+      <div class="content-grid">
+        <article class="panel chart-panel"><div class="panel-heading"><div><h3>Hiệu suất video</h3><p>Lượt xem và người theo dõi mới theo từng video</p></div><button class="text-btn" data-goto="growth">Xem phân tích ↗</button></div><canvas id="performanceChart" height="245"></canvas><div class="chart-legend"><span><i class="legend-dot pink-dot"></i>Lượt xem</span><span><i class="legend-dot cyan-dot"></i>Follow mới</span></div></article>
+        <article class="panel"><div class="panel-heading"><div><h3>Chỉ số cần chú ý</h3><p>Tự động tính từ dữ liệu hiện có</p></div></div><div class="insight-list" id="insights"></div></article>
+      </div>
+      <article class="panel table-panel"><div class="panel-heading"><div><h3>Video gần đây</h3><p>Các nội dung mới nhất trong thư viện</p></div><button class="text-btn" data-goto="videos">Tất cả video →</button></div><div class="table-wrap"><table><thead><tr><th>VIDEO</th><th>NGÀY ĐĂNG</th><th>VIEW</th><th>LIKE</th><th>FOLLOW MỚI</th><th></th></tr></thead><tbody id="recentVideos"></tbody></table></div></article>
+    </section>
+
+    <section class="page" id="page-videos">
+      <div class="section-intro"><div><h2>Thư viện video</h2><p>Ghi lại số liệu từng video để so sánh hiệu quả nội dung.</p></div><button class="btn btn-primary" id="addVideo">＋ Thêm video</button></div>
+      <div class="toolbar"><input id="videoSearch" placeholder="⌕  Tìm theo tiêu đề hoặc chủ đề..."><select id="sortVideos"><option value="date">Mới đăng trước</option><option value="views">View cao nhất</option><option value="engagement">Tương tác cao nhất</option></select></div>
+      <div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>VIDEO / CHỦ ĐỀ</th><th>NGÀY ĐĂNG</th><th>VIEW</th><th>LIKE</th><th>BÌNH LUẬN</th><th>CHIA SẺ</th><th>FOLLOW MỚI</th><th></th></tr></thead><tbody id="allVideos"></tbody></table></div><div class="empty-state" id="emptyVideos" hidden>Chưa có video phù hợp. Hãy thêm video đầu tiên.</div></div>
+    </section>
+
+    <section class="page" id="page-growth">
+      <div class="section-intro"><div><h2>Phân tích tăng trưởng</h2><p>Nhìn ra nội dung hiệu quả và cơ hội chuyển đổi người xem thành follower.</p></div></div>
+      <div class="stats-grid compact">
+        <article class="stat-card"><span class="muted">Tỷ lệ Like</span><strong id="likeRate">—</strong><small>Like / View</small></article>
+        <article class="stat-card"><span class="muted">Tỷ lệ bình luận</span><strong id="commentRate">—</strong><small>Bình luận / View</small></article>
+        <article class="stat-card"><span class="muted">Tỷ lệ chia sẻ</span><strong id="shareRate">—</strong><small>Chia sẻ / View</small></article>
+        <article class="stat-card"><span class="muted">Chuyển đổi Follow</span><strong id="followRate">—</strong><small>Follow mới / View</small></article>
+      </div>
+      <div class="content-grid">
+        <article class="panel"><div class="panel-heading"><div><h3>Video nổi bật</h3><p>Video có lượt xem cao nhất</p></div></div><div id="topVideo" class="feature-video"></div></article>
+        <article class="panel"><div class="panel-heading"><div><h3>Đề xuất tối ưu</h3><p>Gợi ý dựa trên dữ liệu, không đảm bảo kết quả</p></div></div><div id="growthTips" class="insight-list"></div></article>
+      </div>
+      <div class="panel"><div class="panel-heading"><div><h3>So sánh các video</h3><p>Tỷ lệ tương tác giúp so sánh công bằng hơn giữa video có quy mô view khác nhau.</p></div></div><div id="comparison" class="comparison-list"></div></div>
+    </section>
+
+    <section class="page" id="page-ideas">
+      <div class="section-intro"><div><h2>Ý tưởng nội dung</h2><p>Tạo gợi ý nhanh để duy trì lịch đăng và thử nghiệm chủ đề.</p></div></div>
+      <div class="idea-generator panel"><div class="generator-copy"><span class="sparkle">✦</span><h3>Trợ lý lên ý tưởng</h3><p>Chọn lĩnh vực và mục tiêu để nhận danh sách ý tưởng gợi ý ngay trên trình duyệt.</p></div><div class="generator-controls"><label>Lĩnh vực / chủ đề<input id="ideaTopic" value="đời sống, học tập và giải trí"></label><label>Mục tiêu<select id="ideaGoal"><option value="views">Tăng lượt xem</option><option value="follows">Tăng người theo dõi</option><option value="engagement">Tăng tương tác</option></select></label><button class="btn btn-primary" id="generateIdeas">✦ Tạo ý tưởng</button></div></div>
+      <div class="idea-grid" id="ideaResults"></div>
+      <div class="panel"><div class="panel-heading"><div><h3>Mẹo phát triển nội dung</h3><p>Các thử nghiệm thực tế bạn có thể áp dụng</p></div></div><div class="tips-grid"><div class="tip"><b>01 · Mở đầu rõ ý</b><p>Thử một câu hỏi, kết quả bất ngờ hoặc vấn đề cụ thể trong vài giây đầu.</p></div><div class="tip"><b>02 · Một video, một ý chính</b><p>Giữ nội dung tập trung để người xem hiểu nhanh giá trị của video.</p></div><div class="tip"><b>03 · Lời kêu gọi tự nhiên</b><p>Nếu nội dung có ích, mời người xem theo dõi để xem phần tiếp theo.</p></div></div></div>
+    </section>
+
+    <section class="page" id="page-planner">
+      <div class="section-intro"><div><h2>Lịch nội dung</h2><p>Lên kế hoạch đăng video và theo dõi trạng thái sản xuất.</p></div><button class="btn btn-primary" id="addPlan">＋ Thêm kế hoạch</button></div>
+      <div class="planner-layout"><div class="panel"><div class="panel-heading"><div><h3>Kế hoạch sắp tới</h3><p>Lịch được lưu trên trình duyệt này</p></div></div><div id="planList" class="plan-list"></div></div><div class="panel planner-side"><h3>Quy trình gợi ý</h3><ol><li>Chọn một chủ đề cụ thể.</li><li>Viết câu mở đầu thu hút.</li><li>Quay và biên tập video.</li><li>Đăng vào thời điểm phù hợp với khán giả.</li><li>Nhập số liệu sau khi đăng để đánh giá.</li></ol></div></div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <div class="section-intro"><div><h2>Cài đặt workspace</h2><p>Thông tin tài khoản và sao lưu dữ liệu prototype.</p></div></div>
+      <div class="settings-grid"><div class="panel"><h3>Thông tin kênh</h3><label class="field">Tên hiển thị<input id="accountName" placeholder="Tên kênh của bạn"></label><label class="field">TikTok username<input id="accountHandle" placeholder="@username"></label><label class="field">Mô tả ngắn<input id="accountBio" placeholder="Chủ đề nội dung chính"></label><button class="btn btn-primary" id="saveAccount">Lưu thông tin</button></div><div class="panel"><h3>Dữ liệu & sao lưu</h3><p class="muted">Dữ liệu video, kế hoạch và cấu hình được lưu trong localStorage của trình duyệt.</p><div class="backup-actions"><button class="btn btn-secondary" id="exportData">↓ Xuất bản sao JSON</button><label class="btn btn-secondary file-label">↑ Nhập bản sao JSON<input type="file" id="importData" accept="application/json"></label></div><button class="btn btn-danger" id="resetData">Khôi phục dữ liệu mẫu</button><p class="small-note">Không lưu mật khẩu TikTok. Không nhập cookie hoặc mã xác thực vào website.</p></div></div>
+      <div class="panel security-panel"><span class="security-icon">⌑</span><div><b>Quyền riêng tư & giới hạn</b><p>Prototype không đăng nhập TikTok, không tự động xem video, follow, like, comment hoặc gửi yêu cầu hàng loạt. Dữ liệu mẫu chỉ dùng để minh họa cách hoạt động.</p></div></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="videoModal" hidden><div class="modal"><div class="modal-head"><div><h3 id="videoModalTitle">Thêm video</h3><p>Nhập số liệu từ TikTok Analytics hoặc ghi chép của bạn.</p></div><button class="icon-btn" data-close="videoModal">✕</button></div>
+<form id="videoForm"><input type="hidden" id="videoId"><label>Tiêu đề video<input id="vTitle" required maxlength="120" placeholder="Ví dụ: 5 mẹo học tập hiệu quả"></label><div class="form-row"><label>Chủ đề<input id="vTopic" placeholder="Học tập"></label><label>Ngày đăng<input id="vDate" type="date" required></label></div><div class="form-row"><label>Lượt xem<input id="vViews" type="number" min="0" required value="0"></label><label>Lượt thích<input id="vLikes" type="number" min="0" value="0"></label></div><div class="form-row"><label>Bình luận<input id="vComments" type="number" min="0" value="0"></label><label>Chia sẻ<input id="vShares" type="number" min="0" value="0"></label></div><label>Follow mới ghi nhận<input id="vFollows" type="number" min="0" value="0"></label><div class="modal-actions"><button type="button" class="btn btn-secondary" data-close="videoModal">Hủy</button><button class="btn btn-primary" type="submit">Lưu video</button></div></form></div></div>
+
+<div class="modal-backdrop" id="planModal" hidden><div class="modal"><div class="modal-head"><div><h3>Thêm kế hoạch</h3><p>Lên lịch nội dung dự kiến.</p></div><button class="icon-btn" data-close="planModal">✕</button></div><form id="planForm"><label>Ý tưởng / tiêu đề<input id="pTitle" required maxlength="120" placeholder="Video giới thiệu series mới"></label><div class="form-row"><label>Ngày dự kiến<input id="pDate" type="date" required></label><label>Trạng thái<select id="pStatus"><option>Ý tưởng</option><option>Đang chuẩn bị</option><option>Sẵn sàng đăng</option><option>Đã đăng</option></select></label></div><label>Ghi chú<input id="pNote" placeholder="Hook, cảnh quay, hashtag..."></label><div class="modal-actions"><button type="button" class="btn btn-secondary" data-close="planModal">Hủy</button><button class="btn btn-primary">Lưu kế hoạch</button></div></form></div></div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body></html>
